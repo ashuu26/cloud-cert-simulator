@@ -1,27 +1,45 @@
 {
-  "name": "aws-cert-simulator",
+  "name": "cloud-cert-simulator",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "seed:questions": "tsx scripts/seed-questions.ts",
+    "test:integration": "vitest run --config vitest.integration.config.mts"
   },
   "dependencies": {
-    "react": "19.1.0",
-    "react-dom": "19.1.0",
-    "next": "15.5.4"
+    "@supabase/ssr": "^0.12.7",
+    "@supabase/supabase-js": "^2.117.3",
+    "next": "^16.4.0",
+    "papaparse": "^5.7.0",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "server-only": "^0.0.1",
+    "stripe": "^23.0.0",
+    "zod": "^4.6.5"
   },
   "devDependencies": {
-    "typescript": "^5",
-    "@types/node": "^20",
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^24.19.2",
+    "@types/papaparse": "^5.5.2",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "@tailwindcss/postcss": "^4",
-    "tailwindcss": "^4",
+    "dotenv": "^18.0.7",
     "eslint": "^9",
-    "eslint-config-next": "15.5.4",
-    "@eslint/eslintrc": "^3"
+    "eslint-config-next": "^16.4.0",
+    "supabase": "^2.120.0",
+    "tailwindcss": "^4",
+    "tsx": "^4.23.15",
+    "typescript": "^5",
+    "vitest": "^5.0.3"
+  },
+  "engines": {
+    "node": ">=20.9"
   }
 }

@@ -1,26 +1,138 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* Night view is driven by data-theme on <html> (set before first paint in layout.tsx). */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+@theme {
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, monospace;
+
+  /* Dark navy ink + restrained orange accent */
+  --color-ink: #0f1b2d;
+  --color-ink-soft: #33415a;
+  --color-muted: #5b6577;
+  --color-line: #e3e6eb;
+  --color-line-strong: #cfd4dc;
+  --color-paper: #fafaf8;
+  --color-card: #ffffff;
+  --color-accent: #f59e0b;
+  --color-accent-strong: #c46f00; /* AA contrast for orange text on white */
+  --color-accent-soft: #fff4e0;
+  --color-ok: #15803d;
+  --color-ok-soft: #e9f7ee;
+  --color-bad: #b42318;
+  --color-bad-soft: #fdecea;
+  --color-warn: #7a4600;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* Night palette. Same token names, so every component switches automatically. */
+@layer base {
+  [data-theme="dark"] {
+    color-scheme: dark;
+    --color-ink: #e7ebf2;
+    --color-ink-soft: #b9c2cf;
+    --color-muted: #8d98aa;
+    --color-line: #243149;
+    --color-line-strong: #35445f;
+    --color-paper: #0b1220;
+    --color-card: #111b2e;
+    --color-accent: #f59e0b;
+    --color-accent-strong: #fbbf24;
+    --color-accent-soft: #2b1f08;
+    --color-ok: #4ade80;
+    --color-ok-soft: #0e2a1b;
+    --color-bad: #f87171;
+    --color-bad-soft: #2d1316;
+    --color-warn: #fcd34d;
+  }
+  /* No-JavaScript fallback: follow the OS setting. */
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme]) {
+      color-scheme: dark;
+      --color-ink: #e7ebf2;
+      --color-ink-soft: #b9c2cf;
+      --color-muted: #8d98aa;
+      --color-line: #243149;
+      --color-line-strong: #35445f;
+      --color-paper: #0b1220;
+      --color-card: #111b2e;
+      --color-accent-strong: #fbbf24;
+      --color-accent-soft: #2b1f08;
+      --color-ok: #4ade80;
+      --color-ok-soft: #0e2a1b;
+      --color-bad: #f87171;
+      --color-bad-soft: #2d1316;
+      --color-warn: #fcd34d;
+    }
   }
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-paper);
+  color: var(--color-ink);
+  transition: background-color 0.2s ease, color 0.2s ease;
+  -webkit-font-smoothing: antialiased;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+@utility btn {
+  @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2.5 text-sm font-semibold transition-colors
+    focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-strong
+    disabled:cursor-not-allowed disabled:opacity-50;
+}
+
+@layer components {
+  .container-page {
+    @apply mx-auto w-full max-w-6xl px-4 sm:px-6;
+  }
+  .btn-primary {
+    @apply btn bg-ink text-paper hover:bg-ink-soft;
+  }
+  .btn-accent {
+    @apply btn bg-accent text-[#0f1b2d] hover:bg-[#e08e00];
+  }
+  .btn-outline {
+    @apply btn border border-line-strong bg-card text-ink hover:border-ink;
+  }
+  .btn-ghost {
+    @apply btn text-ink-soft hover:bg-ink/5 hover:text-ink;
+  }
+  .card {
+    @apply rounded-xl border border-line bg-card shadow-[0_1px_2px_rgba(15,27,45,0.04)] dark:shadow-none;
+  }
+  .eyebrow {
+    @apply font-mono text-xs font-medium uppercase tracking-[0.14em] text-accent-strong;
+  }
+  .badge {
+    @apply inline-flex items-center gap-1 rounded-full border px-2.5 py-0.5 text-xs font-medium;
+  }
+  .input {
+    @apply w-full rounded-lg border border-line-strong bg-card px-3 py-2 text-sm text-ink placeholder:text-muted
+      focus:border-ink focus:outline-none focus:ring-2 focus:ring-accent/40;
+  }
+  .label {
+    @apply mb-1 block text-sm font-medium text-ink;
+  }
+  .link {
+    @apply font-medium text-ink underline decoration-line-strong underline-offset-4 hover:decoration-ink;
+  }
+  .prose-legal h2 {
+    @apply mt-8 mb-2 text-lg font-semibold;
+  }
+  .prose-legal p,
+  .prose-legal li {
+    @apply text-[15px] leading-7 text-ink-soft;
+  }
+  .prose-legal ul {
+    @apply ml-5 list-disc space-y-1;
+  }
 }
