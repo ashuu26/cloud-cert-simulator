@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Cloud Certification Simulator">
+  <defs>
+    <linearGradient id="bg" x1="0%" x2="100%" y1="0%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#111827"/>
+    </linearGradient>
+    <linearGradient id="cloud" x1="0%" x2="100%" y1="0%" y2="100%">
+      <stop offset="0%" stop-color="#e0f2fe"/>
+      <stop offset="100%" stop-color="#c7d2fe"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="64" height="64" rx="16" fill="url(#bg)"/>
+
+  <path d="M19 40c-3.8 0-6.9-3.1-6.9-6.9 0-3.5 2.6-6.3 5.9-6.8A10.3 10.3 0 0 1 30.6 18a9.9 9.9 0 0 1 9.9 9.9 7.3 7.3 0 0 1 7.3 7.3c0 4-3.3 7.3-7.3 7.3H19Z" fill="url(#cloud)"/>
+
+  <path d="M23.6 42.5 28 47l12.5-15" fill="none" stroke="#f59e0b" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

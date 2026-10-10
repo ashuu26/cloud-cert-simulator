@@ -15,6 +15,11 @@ export const metadata: Metadata = {
   title: { default: `${BRAND} — Cloud certification practice`, template: `%s · ${BRAND}` },
   description:
     "Practice smarter with realistic cloud certification questions, detailed explanations, and performance insights. Independent practice platform.",
+  icons: {
+    icon: "/favicon.svg",
+    shortcut: "/favicon.svg",
+    apple: "/favicon.svg",
+  },
 };
 
 export const viewport: Viewport = {
